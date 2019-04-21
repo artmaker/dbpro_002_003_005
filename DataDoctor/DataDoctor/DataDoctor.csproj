@@ -182,6 +182,47 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\avatar-1.jpg" />
+    <Content Include="Content\images\avatar-2.jpg" />
+    <Content Include="Content\images\avatar-3.jpg" />
+    <Content Include="Content\images\avatar-4.jpg" />
+    <Content Include="Content\images\avatar-5.jpg" />
+    <Content Include="Content\images\bitbucket.png" />
+    <Content Include="Content\images\card-img-1.jpg" />
+    <Content Include="Content\images\card-img-2.jpg" />
+    <Content Include="Content\images\card-img-3.jpg" />
+    <Content Include="Content\images\card-img.jpg" />
+    <Content Include="Content\images\down-arrow.png" />
+    <Content Include="Content\images\drag-indicator.png" />
+    <Content Include="Content\images\dribbble.png" />
+    <Content Include="Content\images\dropbox.png" />
+    <Content Include="Content\images\eco-product-img-1.png" />
+    <Content Include="Content\images\eco-product-img-2.png" />
+    <Content Include="Content\images\eco-product-img-3.png" />
+    <Content Include="Content\images\eco-product-img-4.png" />
+    <Content Include="Content\images\eco-slider-img-1.png" />
+    <Content Include="Content\images\eco-slider-img-2.png" />
+    <Content Include="Content\images\eco-slider-img-3.png" />
+    <Content Include="Content\images\error-img.png" />
+    <Content Include="Content\images\github.png" />
+    <Content Include="Content\images\loader.svg" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\mail_chimp.png" />
+    <Content Include="Content\images\product-pic-2.jpg" />
+    <Content Include="Content\images\product-pic-3.jpg" />
+    <Content Include="Content\images\product-pic-4.jpg" />
+    <Content Include="Content\images\product-pic.jpg" />
+    <Content Include="Content\images\slack.png" />
+    <Content Include="Content\images\switch.png" />
+    <Content Include="Content\libs\css\style.css" />
+    <Content Include="Content\libs\js\dashboard-ecommerce.js" />
+    <Content Include="Content\libs\js\dashboard-finance.js" />
+    <Content Include="Content\libs\js\dashboard-influencer.js" />
+    <Content Include="Content\libs\js\dashboard-sales.js" />
+    <Content Include="Content\libs\js\gmaps.min.js" />
+    <Content Include="Content\libs\js\google_map.js" />
+    <Content Include="Content\libs\js\jvectormap.custom.js" />
+    <Content Include="Content\libs\js\main-js.js" />
     <Content Include="Content\LogAssests\css\style.css" />
     <Content Include="Content\LogAssests\fonts\material-icon\css\material-design-iconic-font.css" />
     <Content Include="Content\LogAssests\fonts\material-icon\css\material-design-iconic-font.min.css" />
@@ -253,6 +294,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\LogAssests\fonts\poppins\" />
+    <Folder Include="Content\vendor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -10,6 +10,7 @@ namespace DataDoctor.Controllers
     {
         public ActionResult Index()
         {
+            //check the changes
             return View();
         }
 

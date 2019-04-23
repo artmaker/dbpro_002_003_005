@@ -147,11 +147,13 @@ namespace DataDoctor.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Register(RegisterViewModel model)
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,Name=model.Name,Gender=model.Gender,Licence=model.Licence,Address=model.Address };
+                //var user = new ApplicationUser { UserName = email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

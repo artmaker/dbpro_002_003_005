@@ -64,6 +64,16 @@ namespace DataDoctor.Models
 
     public class RegisterViewModel
     {
+
+        //[Required]
+        //[EmailAddress]
+        [Display(Name = "Licence NO For Doctors")]
+        public string Licence { get; set; }
+        //[Display(Name = "Date Of Birth")]
+        //public System.DateTime DateOfBirth { get; set; }
+        public string Address { get; set; }
+        public string Gender { get; set; }
+        public string Name { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

@@ -12,6 +12,7 @@ namespace DataDoctor.Controllers
     {
         public ActionResult Index()
         {
+
             List<Prescription> PrescriptionsList;
             using (DataDoctorEntities2 entity = new DataDoctorEntities2())
             {
@@ -33,6 +34,7 @@ namespace DataDoctor.Controllers
             }
                 //check the changes
                 return View(PrescriptionsList);
+
         }
 
         public ActionResult About()

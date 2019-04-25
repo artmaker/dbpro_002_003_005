@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DataHandler.Patient>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.S_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.E_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.S_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.E_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Patient_Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Patient_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Patient_Id })|
+                @Html.ActionLink("AddDisease", "AddDisease", new { id = item.Patient_Id })|
+                @Html.ActionLink("AddPrescription", "AddPrescription", new { id = item.Patient_Id })|
+                
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

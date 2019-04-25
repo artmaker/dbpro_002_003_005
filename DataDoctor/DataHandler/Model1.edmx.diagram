@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6d035c47d55e47a1a1412c8b76c09683" Name="Diagram1">
+        <EntityTypeShape EntityType="DataDoctorModel.AspNetRole" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.AspNetUser" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Disease" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Doc_Specialization" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Doctor" Width="1.5" PointX="10.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.DoctorDegree" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Medication" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Medicin" Width="1.5" PointX="6" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.MedicinRank" Width="1.5" PointX="3.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Patient" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Person" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Prescription" Width="1.5" PointX="10.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Symptom" Width="1.5" PointX="8.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.sysdiagram" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="DataDoctorModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_Prescription_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK__Symptoms__Diseas__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_DoctorDegree_Doctor" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_Medication_Medicin" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_Medication_Medicin1" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_Medicin_MedicinRank" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_Prescription_Patient" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.Pat_Die" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.Pat_Doc" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.Pat_Medicin" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -17,7 +17,8 @@ namespace DataDoctor.Controllers
         // GET: Medicins
         public ActionResult Index()
         {
-            var medicins = db.Medicins.Include(m => m.MedicinRank);
+            //var medicins = db.Medicins.Include(m => m.MedicinRank);
+            var medicins = db.Medicins;
             return View(medicins.ToList());
         }
 

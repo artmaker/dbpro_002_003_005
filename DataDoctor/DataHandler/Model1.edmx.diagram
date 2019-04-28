@@ -4,26 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6d035c47d55e47a1a1412c8b76c09683" Name="Diagram1">
-        <EntityTypeShape EntityType="DataDoctorModel.AspNetRole" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.AspNetUser" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="4e77e6e1a210498793a6874dbe889662" Name="Diagram1">
+        <EntityTypeShape EntityType="DataDoctorModel.AspNetRole" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.AspNetUser" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DataDoctorModel.Contact" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.Disease" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.Doc_Specialization" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.Doctor" Width="1.5" PointX="10.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.DoctorDegree" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.Medication" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.Medicin" Width="1.5" PointX="6" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.MedicinRank" Width="1.5" PointX="3.75" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.Patient" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.Person" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.Prescription" Width="1.5" PointX="10.5" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.Symptom" Width="1.5" PointX="8.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataDoctorModel.sysdiagram" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Disease" Width="1.5" PointX="8.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Doc_Specialization" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Doctor" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.DoctorDegree" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Medication" Width="1.5" PointX="9.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Medicin" Width="1.5" PointX="7.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.MedicinRank" Width="1.5" PointX="5.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Patient" Width="1.5" PointX="10.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Person" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Prescription" Width="1.5" PointX="13" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.Symptom" Width="1.5" PointX="10.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataDoctorModel.sysdiagram" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="DataDoctorModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DataDoctorModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_Doc_Specialization_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_DoctorDegree_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DataDoctorModel.FK_MedicinRank_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="DataDoctorModel.FK_Prescription_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="DataDoctorModel.FK__Symptoms__Diseas__46E78A0C" ManuallyRouted="false" />
         <AssociationConnector Association="DataDoctorModel.FK_DoctorDegree_Doctor" ManuallyRouted="false" />

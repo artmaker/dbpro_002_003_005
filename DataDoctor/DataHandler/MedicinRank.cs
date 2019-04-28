@@ -15,9 +15,10 @@ namespace DataHandler
     public partial class MedicinRank
     {
         public int Med_Id { get; set; }
-        public Nullable<int> Ranking { get; set; }
+        public int Ranking { get; set; }
         public string Doctor_Id { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Medicin Medicin { get; set; }
     }
 }

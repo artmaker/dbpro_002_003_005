@@ -171,6 +171,8 @@
     <Compile Include="Controllers\DiseasesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicationsController.cs" />
+    <Compile Include="Controllers\MedicinsController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\PrescriptionsController.cs" />
     <Compile Include="Controllers\SymptomsController.cs" />
@@ -180,7 +182,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Medicate.cs" />
     <Compile Include="Models\Prescript.cs" />
+    <Compile Include="Models\SymptomsForPrediction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -315,6 +319,19 @@
     <Content Include="Views\Symptoms\Details.cshtml" />
     <Content Include="Views\Symptoms\Edit.cshtml" />
     <Content Include="Views\Symptoms\Index.cshtml" />
+    <Content Include="Views\Medicins\Create.cshtml" />
+    <Content Include="Views\Medicins\Delete.cshtml" />
+    <Content Include="Views\Medicins\Details.cshtml" />
+    <Content Include="Views\Medicins\Edit.cshtml" />
+    <Content Include="Views\Medicins\Index.cshtml" />
+    <Content Include="Views\Medications\Create.cshtml" />
+    <Content Include="Views\Medications\Delete.cshtml" />
+    <Content Include="Views\Medications\Details.cshtml" />
+    <Content Include="Views\Medications\Edit.cshtml" />
+    <Content Include="Views\Medications\Index.cshtml" />
+    <Content Include="Views\Diseases\PredictDisease.cshtml" />
+    <Content Include="Views\Diseases\Predictions.cshtml" />
+    <Content Include="Views\Diseases\PatientDiseases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,7 +348,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataHandler\DataHandler.csproj">
-      <Project>{f98b95c9-e307-4212-9af2-539b7df5cd11}</Project>
+      <Project>{112015ca-8e2a-4b9d-b347-702a7cded830}</Project>
       <Name>DataHandler</Name>
     </ProjectReference>
   </ItemGroup>

@@ -13,12 +13,21 @@ namespace DataDoctor.Controllers
     public class SymptomsController : Controller
     {
         private DataDoctorEntities2 db = new DataDoctorEntities2();
+        static public int Diseas_Id { get; set; }
 
         // GET: Symptoms
-        public ActionResult Index()
+        public ActionResult Index(int? ide)
         {
-            var symptoms = db.Symptoms.Include(s => s.Disease);
-            return View(symptoms.ToList());
+            if (ide != null)
+            {
+                Diseas_Id = Convert.ToInt32(ide);
+                var symptoms = db.Symptoms.Include(s => s.Disease).Where(d =>d.Disease_Id==ide);
+                return View(symptoms.ToList());
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         // GET: Symptoms/Details/5
@@ -39,7 +48,7 @@ namespace DataDoctor.Controllers
         // GET: Symptoms/Create
         public ActionResult Create()
         {
-            ViewBag.Disease_Id = new SelectList(db.Diseases, "Disease_Id", "Disease_Name");
+            ViewBag.Disease_Id = new SelectList(db.Diseases.Where(d => d.Disease_Id==Diseas_Id), "Disease_Id", "Disease_Name");
             return View();
         }
 
@@ -52,13 +61,15 @@ namespace DataDoctor.Controllers
         {
             if (ModelState.IsValid)
             {
+                //var dis=db.Diseases.Where(d => d.Disease_Name==symptom.Disease_Id)
                 db.Symptoms.Add(symptom);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { ide=symptom.Disease_Id });
             }
 
             ViewBag.Disease_Id = new SelectList(db.Diseases, "Disease_Id", "Disease_Name", symptom.Disease_Id);
             return View(symptom);
+            //return RedirectToAction("Index", Diseas_Id);
         }
 
         // GET: Symptoms/Edit/5

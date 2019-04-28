@@ -1,0 +1,50 @@
+﻿@model DataHandler.Medication
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Medication</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.timings)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.timings)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Medicin.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Medicin.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Medicin1.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Medicin1.Name)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

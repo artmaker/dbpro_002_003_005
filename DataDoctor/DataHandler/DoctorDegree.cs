@@ -17,6 +17,7 @@ namespace DataHandler
         public string Doctor_Id { get; set; }
         public string Degree { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Doctor Doctor { get; set; }
     }
 }

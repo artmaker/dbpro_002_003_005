@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DataHandler.Medicin>
+﻿@model IEnumerable<DataHandler.Medicates>
 
 @{
     Layout = null;
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="~/Content/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/Content/assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="~/Content/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>Medicins</title>
+    <title>Patient Medications</title>
 </head>
 <body>
     <div class="dashboard-main-wrapper">
@@ -186,7 +186,7 @@
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-header">
-                            <h2 class="pageheader-title">Medicins</h2>
+                            <h2 class="pageheader-title">Patient Medications</h2>
                         </div>
                     </div>
                 </div>
@@ -233,16 +233,15 @@
                                                     <!-- <th class="border-0">Image</th> -->
 
                                                     <th class="border-0">Medicine Name</th>
-                                                    <th class="border-0">Potency</th>
-                                                    <th class="border-0">Company</th>
-
+                                                    <th class="border-0">Timings</th>
+                                                    
 
 
 
                                                     <th class="border-0">Edit</th>
                                                     <th class="border-0">Details</th>
                                                     <th class="border-0">Delete</th>
-
+                                                    
 
 
                                                 </tr>
@@ -251,11 +250,9 @@
                                                 @foreach (var item in Model)
                                                 {
                                                     <tr>
-                                                        <td>@item.Name</td>
-                                                        <td>@item.Potency</td>
-                                                        <td>@item.Company</td>
-
-
+                                                        <td>@item.Med_Name</td>
+                                                        <td>@item.timings</td>
+                                                        
 
                                                         <td>
                                                             @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
@@ -267,16 +264,16 @@
                                                             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                                                         </td>
                                                         @*<td>
-                                                                @Html.ActionLink("Prescriptions", "Index", "Prescriptions", new { ide = item.Patient_Id }, null)|
+                                                            @Html.ActionLink("Prescriptions", "Index", "Prescriptions", new { ide = item.Patient_Id }, null)|
 
-                                                            </td>*@
+                                                        </td>*@
 
                                                         @*<td><span class="badge-dot badge-brand mr-1"></span>InTransit </td>*@
                                                     </tr>
                                                 }
 
                                                 <tr>
-                                                    <td colspan="9"><a href="@Url.Action("Create", "Medicins")" class="btn btn-outline-light float-right">ADD Medicins</a></td>
+                                                    <td colspan="9"><a href="@Url.Action("Create", "Medications")" class="btn btn-outline-light float-right">ADD Medication</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -315,3 +312,4 @@
     <script src="~/Content/assets/libs/js/dashboard-ecommerce.js"></script>
 </body>
 </html>
+

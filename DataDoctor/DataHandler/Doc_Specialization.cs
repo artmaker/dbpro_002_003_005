@@ -16,5 +16,7 @@ namespace DataHandler
     {
         public string Doctor_Id { get; set; }
         public string Field { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

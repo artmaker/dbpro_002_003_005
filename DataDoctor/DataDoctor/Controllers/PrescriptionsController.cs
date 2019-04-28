@@ -13,12 +13,21 @@ namespace DataDoctor.Controllers
     public class PrescriptionsController : Controller
     {
         private DataDoctorEntities2 db = new DataDoctorEntities2();
+        static public int Pat_Id { get; set; }
 
         // GET: Prescriptions
-        public ActionResult Index()
+        public ActionResult Index(int? ide)
         {
-            var prescriptions = db.Prescriptions.Include(p => p.AspNetUser).Include(p => p.Patient);
-            return View(prescriptions.ToList());
+            ViewBag.Pat_Id = Convert.ToInt32(ide);
+            if (ide != null)
+            {
+                Pat_Id = Convert.ToInt32(ide);
+                var prescriptions = db.Prescriptions.Include(p => p.AspNetUser).Include(p => p.Patient).Where(a => a.AspNetUser.UserName == User.Identity.Name).Where(p => p.patient_Id==Pat_Id);
+                return View(prescriptions.ToList());
+            }
+            else {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
         }
 
         // GET: Prescriptions/Details/5
@@ -40,7 +49,10 @@ namespace DataDoctor.Controllers
         public ActionResult Create()
         {
             ViewBag.Doctor_Id = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.patient_Id = new SelectList(db.Patients, "Patient_Id", "Area");
+            //Patient pat = new Patient();
+            //pat.Patient_Id = Pat_Id;
+            ViewBag.patient_Id = new SelectList(db.Patients.Where(P => P.Patient_Id==Pat_Id), "Patient_Id", "Patient_Id");
+            //ViewBag.patient_Id = Pat_Id;
             return View();
         }
 
@@ -49,13 +61,19 @@ namespace DataDoctor.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Pres_Id,patient_Id,St_Date,E_Date,Results,Doctor_Id")] Prescription prescription)
+        public ActionResult Create([Bind(Include = "Pres_Id,patient_Id,St_Date,E_Date,Results,Doctor_Id")] Prescription prescription,int? ide)
         {
+            var users = db.Database.SqlQuery<string>(string.Format("Select Id from dbo.AspNetUsers where UserName='{0}'", User.Identity.Name)).ToList();
+            string user = users[0];
             if (ModelState.IsValid)
             {
+                prescription.Doctor_Id = user;
+                //prescription.patient_Id = Convert.ToInt32(ide);
+                //prescription.patient_Id = Convert.ToInt32(Pat_Id);
+                //prescription.patient_Id = ViewBag.Pat_Id;
                 db.Prescriptions.Add(prescription);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index",new { ide=prescription.patient_Id});
             }
 
             ViewBag.Doctor_Id = new SelectList(db.AspNetUsers, "Id", "Email", prescription.Doctor_Id);

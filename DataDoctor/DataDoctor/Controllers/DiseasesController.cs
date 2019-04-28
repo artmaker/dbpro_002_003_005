@@ -129,5 +129,48 @@ namespace DataDoctor.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult PredictDisease()
+        {
+            return View(db.Diseases.ToList());
+        }
+        public ActionResult GetPrediction(string disease)
+        {
+
+            string[] symp = disease.Split(',');
+            List<Symptom> Syptoms = new List<Symptom>();
+            Syptoms = db.Symptoms.Include(d => d.Disease).ToList();
+            foreach (string str in symp)
+            {
+                Syptoms = Syptoms.Where(s => s.symptom1==str).ToList();
+            }
+
+            int arf = 4;
+            //return View(db.Diseases.ToList());
+            if (Syptoms.Count() >= 0)
+            {
+                return RedirectToAction("Predictions", new { ide = Syptoms[0].Disease_Id });
+            }
+            else
+            {
+                return RedirectToAction("Predictions", new { ide = -1 });
+            }
+        }
+        public ActionResult Predictions(int ide)
+        {
+            if (ide == -1)
+            {
+                return View(db.Diseases.Where(d => d.Disease_Id == -999999).ToList());
+            }
+            else {
+                return View(db.Diseases.Where(d => d.Disease_Id == ide).ToList());
+            }
+        }
+
+        public ActionResult PatientDiseases(int ide)
+        {
+            
+            return View(db.Patients.Include(d => d.Disease).Where(p => p.Patient_Id == ide).ToList());
+        }
     }
 }

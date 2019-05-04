@@ -16,6 +16,7 @@ namespace DataDoctor.Controllers
         static public int Diseas_Id { get; set; }
 
         // GET: Symptoms
+        [Authorize(Roles = "Doctor")]
         public ActionResult Index(int? ide)
         {
             if (ide != null)
@@ -29,8 +30,23 @@ namespace DataDoctor.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
+        [Authorize(Roles = "General")]
+        public ActionResult GeneralIndex(int? ide)
+        {
+            if (ide != null)
+            {
+                Diseas_Id = Convert.ToInt32(ide);
+                var symptoms = db.Symptoms.Include(s => s.Disease).Where(d => d.Disease_Id == ide);
+                return View(symptoms.ToList());
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
 
         // GET: Symptoms/Details/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -46,6 +62,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Symptoms/Create
+        [Authorize(Roles = "Doctor")]
         public ActionResult Create()
         {
             ViewBag.Disease_Id = new SelectList(db.Diseases.Where(d => d.Disease_Id==Diseas_Id), "Disease_Id", "Disease_Name");
@@ -55,6 +72,7 @@ namespace DataDoctor.Controllers
         // POST: Symptoms/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Disease_Id,symptom1")] Symptom symptom)
@@ -73,6 +91,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Symptoms/Edit/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -91,6 +110,7 @@ namespace DataDoctor.Controllers
         // POST: Symptoms/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Disease_Id,symptom1")] Symptom symptom)
@@ -106,6 +126,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Symptoms/Delete/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -121,6 +142,7 @@ namespace DataDoctor.Controllers
         }
 
         // POST: Symptoms/Delete/5
+        [Authorize(Roles = "Doctor")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

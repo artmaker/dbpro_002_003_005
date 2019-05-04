@@ -19,6 +19,7 @@ namespace DataDoctor.Controllers
         private SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
 
         // GET: Patients
+        [Authorize(Roles ="Doctor")]
         public ActionResult Index()
         {
             string name = User.Identity.Name;
@@ -28,13 +29,32 @@ namespace DataDoctor.Controllers
             foreach (var pa in patients)
             {
                 Patient pat = db.Patients.Find(pa);
+                //Patient pat = db.Patients.FirstOrDefault();
                 PatientsInformations.Add(pat);
             }
             //return View(db.Patients.ToList());
             return View(PatientsInformations.ToList());
         }
 
+        public ActionResult GeneralIndex()
+        {
+            string name = User.Identity.Name;
+            //var doc = db.Database.SqlQuery<string>(string.Format("Select Id from dbo.AspNetUsers where UserName='{0}' and Licence is not null", name)).ToList();
+            var patients = db.Database.SqlQuery<int>(string.Format("Select Patient_Id from dbo.Pat_Doc")).ToList();
+            List<Patient> PatientsInformations = new List<Patient>();
+            foreach (var pa in patients)
+            {
+                Patient pat = db.Patients.Find(pa);
+                //Patient pat = db.Patients.FirstOrDefault();
+                PatientsInformations.Add(pat);
+            }
+            //return View(db.Patients.ToList());
+            return View(PatientsInformations.ToList());
+        }
+
+
         // GET: Patients/Details/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -50,6 +70,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Patients/Create
+        [Authorize(Roles = "Doctor")]
         public ActionResult Create()
         {
             return View();
@@ -58,6 +79,7 @@ namespace DataDoctor.Controllers
         // POST: Patients/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Patient_Id,S_Date,E_Date,Area,Remarks,Gender,Status")] Patient patient)
@@ -85,6 +107,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Patients/Edit/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -102,6 +125,7 @@ namespace DataDoctor.Controllers
         // POST: Patients/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Patient_Id,S_Date,E_Date,Area,Remarks,Gender,Status")] Patient patient)
@@ -116,6 +140,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Patients/Delete/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -131,6 +156,7 @@ namespace DataDoctor.Controllers
         }
 
         // POST: Patients/Delete/5
+        [Authorize(Roles = "Doctor")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

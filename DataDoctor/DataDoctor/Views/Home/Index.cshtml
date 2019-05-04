@@ -93,9 +93,9 @@
 
 
                     <li class="nav-item">
-                    <li class="nav-item">
+                    @*<li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index", "Prescriptions")" aria-controls="submenu-2"><i class="fa fa-fw fa-prescription-bottle-alt"></i>Prescriptions</a>
-                    </li>
+                    </li>*@
                     <!-- <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-prescription-bottle-alt"></i>Prescriptions</a>
                     <div id="submenu-2" class="collapse submenu" style="">
                         <ul class="nav flex-column">
@@ -151,6 +151,10 @@
                     <li class="nav-item">
 
                         <a class="nav-link" href="@Url.Action("Index", "Medicins")"><i class="fas fa-fw fa-chart-pie"></i>Manage Medicins</a>
+                    </li>
+                    <li class="nav-item">
+
+                                <a class="nav-link" href="@Url.Action("Index", "Reports")"><i class="fas fa-fw fa-chart-pie"></i>Reports</a>
                     </li>
                     <!-- <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Manage Disease</a>
                     <div id="submenu-3" class="collapse submenu" style="">
@@ -289,7 +293,7 @@
                                             <thead class="bg-light">
                                                 <tr class="border-0">
 
-                                                    <th class="border-0">Doctor_Id</th>
+                                                    @*<th class="border-0">Doctor_Id</th>*@
                                                     <th class="border-0">patient_Id</th>
                                                     <th class="border-0">St_Date</th>
                                                     <th class="border-0">E_Date</th>
@@ -304,13 +308,13 @@
                                                     <tr>
                                                         
                                                         
-                                                        <td>@item.Doctor_Id</td>
+                                                        @*<td>@item.Doctor_Id</td>*@
                                                         <td>@item.patient_Id</td>
                                                         <td>@item.St_Date</td>
                                                         <td>@item.E_Date</td>
                                                         <td>@item.Results</td>
 
-                                                        <td><span class="badge-dot badge-brand mr-1"></span>InTransit </td>
+                                                        
                                                     </tr>
                                                 }
 

@@ -9,12 +9,17 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DataDoctor.Models;
+using DataHandler;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace DataDoctor.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private DataDoctorEntities2 db = new DataDoctorEntities2();
+        private SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -73,13 +78,49 @@ namespace DataDoctor.Controllers
                 return View(model);
             }
 
+            //string query = string.Format("Select * from [dbo].[AspNetUsers] where UserName='{0}'", model.Email);
+            string query = string.Format("Select AspNetRoles.Name from [dbo].[AspNetUsers] inner join AspNetRoles on AspNetUsers.Id=AspNetRoles.Id where UserName='{0}'", model.Email);
+            SqlCommand sqlcommand = new SqlCommand(query, connection);
+            connection.Open();
+            SqlDataReader reader = sqlcommand.ExecuteReader();
+
+            //bool confirm = false;
+            string usertype = null;
+            while (reader.Read())
+            {
+                usertype = reader[0].ToString();
+                int A = 1;
+                //confirm = Convert.ToBoolean(reader["Confirmed"]);
+                //if (reader["Licence"] == null)
+                //{
+                //    usertype = "General";
+                //    int a = 1;
+                //}
+                //else
+                //{
+                //    usertype = "Doctor";
+                //}
+                //usertype = reader["UserType"].ToString();
+
+            }
+
+
+            connection.Close();
+            //return RedirectToLocal(returnUrl);
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if (usertype == "Doctor")
+                        return RedirectToAction("Index", "Home");
+
+                    if (usertype == "General")
+                        return RedirectToAction("GeneralIndex", "Home");
+                    break;
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -89,6 +130,8 @@ namespace DataDoctor.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+            ModelState.AddModelError("", "Invalid login attempt.");
+            return View(model);
         }
 
         //
@@ -158,14 +201,62 @@ namespace DataDoctor.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string role;
+                    if (model.Licence == null)
+                    {
+                        role = "General";
 
-                    return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        role = "Doctor";
+                    }
+
+                    AspNetRole asp = new AspNetRole();
+                    var users = db.AspNetUsers.Where(a => a.UserName == model.Email).ToList();
+                    asp.Id = users[0].Id;
+                    asp.Name = role;
+                    // db.AspNetRoles.Add(asp);
+
+                    if (role != "")
+                    {
+                        string secondquery = "insert into [dbo].[AspNetRoles] values (@Id,@Name)";
+                        SqlCommand secondsqlcommand = new SqlCommand(secondquery, connection);
+                        connection.Open();
+                        secondsqlcommand.Parameters.AddWithValue("@Id", asp.Id);
+
+                        secondsqlcommand.Parameters.AddWithValue("@Name", role);
+
+                        secondsqlcommand.ExecuteNonQuery();
+                        connection.Close();
+                        string thirdquery = "insert into [dbo].[AspNetUserRoles] values (@UserId,@RoleId)";
+                        SqlCommand thirdsqlcommand = new SqlCommand(thirdquery, connection);
+                        connection.Open();
+                        thirdsqlcommand.Parameters.AddWithValue("@UserId", asp.Id);
+
+                        thirdsqlcommand.Parameters.AddWithValue("@RoleId", asp.Id);
+
+                        thirdsqlcommand.ExecuteNonQuery();
+                        connection.Close();
+
+
+
+                        await this.UserManager.AddToRoleAsync(asp.Id, role);
+                    }
+                    if (role == "Doctor")
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    if (role == "General")
+                    {
+                        return RedirectToAction("GeneralIndex", "Home");
+                    }
                 }
                 AddErrors(result);
             }

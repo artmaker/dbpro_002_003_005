@@ -86,9 +86,9 @@
 
 
                             <li class="nav-item">
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index", "Prescriptions")" aria-controls="submenu-2"><i class="fa fa-fw fa-prescription-bottle-alt"></i>Prescriptions</a>
-                            </li>
+                            </li>*@
                             <!-- <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-prescription-bottle-alt"></i>Prescriptions</a>
                         <div id="submenu-2" class="collapse submenu" style="">
                             <ul class="nav flex-column">
@@ -118,7 +118,7 @@
                             </li>
                             <li class="nav-item">
                             <li class="nav-item">
-                                <a class="nav-link" href="#" aria-controls="submenu-2"><i class="fas fa-fw fa-question-circle"></i>Predict Disease</a>
+                                <a class="nav-link" href="@Url.Action("PredictDisease","Diseases")" aria-controls="submenu-2"><i class="fas fa-fw fa-question-circle"></i>Predict Disease</a>
                             </li>
                             <!-- <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-question-circle"></i>Predict Disease</a>
                         <div id="submenu-5" class="collapse submenu" style="">
@@ -144,6 +144,10 @@
                             <li class="nav-item">
 
                                 <a class="nav-link" href="@Url.Action("Index", "Medicins")"><i class="fas fa-fw fa-chart-pie"></i>Manage Medicins</a>
+                            </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="@Url.Action("Index", "Reports")"><i class="fas fa-fw fa-chart-pie"></i>Reports</a>
                             </li>
                             <!-- <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Manage Disease</a>
                         <div id="submenu-3" class="collapse submenu" style="">
@@ -236,9 +240,9 @@
                                                     <th class="border-0">Results</th>
                                                     
                                                     <th class="border-0">Patient Id</th>
-                                                    <th class="border-0">Edit</th>
+                                                    @*<th class="border-0">Edit</th>
                                                     <th class="border-0">Details</th>
-                                                    <th class="border-0">Delete</th>
+                                                    <th class="border-0">Delete</th>*@
                                                     <th class="border-0">Medications</th>
 
                                                     
@@ -253,7 +257,7 @@
                                                     <td>@item.E_Date </td>
                                                     <td>@item.Results</td>
                                                     <td>@item.patient_Id</td>
-                                                    <td>
+                                                    @*<td>
                                                         @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                                                     </td>
                                                     <td>
@@ -261,7 +265,7 @@
                                                     </td>
                                                     <td>
                                                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                                                       </td>
+                                                    </td>*@
                                                     <td> 
                                                         @Html.ActionLink("Medications", "Index", "Medications", new { ide = item.Pres_Id }, null)
 

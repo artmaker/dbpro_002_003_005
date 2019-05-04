@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DataHandler.Patient>
+﻿@model IEnumerable<DataHandler.Disease>
 
 @{
     Layout = null;
@@ -87,9 +87,9 @@
 
 
                             <li class="nav-item">
-                            <li class="nav-item">
+                            @*<li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index", "Prescriptions")" aria-controls="submenu-2"><i class="fa fa-fw fa-prescription-bottle-alt"></i>Prescriptions</a>
-                            </li>
+                            </li>*@
                             <!-- <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-prescription-bottle-alt"></i>Prescriptions</a>
                             <div id="submenu-2" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
@@ -145,6 +145,10 @@
                             <li class="nav-item">
 
                                 <a class="nav-link" href="@Url.Action("Index", "Medicins")"><i class="fas fa-fw fa-chart-pie"></i>Manage Medicins</a>
+                            </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="@Url.Action("Index", "Reports")"><i class="fas fa-fw fa-chart-pie"></i>Reports</a>
                             </li>
                             <!-- <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-3" aria-controls="submenu-3"><i class="fas fa-fw fa-chart-pie"></i>Manage Disease</a>
                             <div id="submenu-3" class="collapse submenu" style="">
@@ -231,7 +235,7 @@
                                                     <tr class="border-0">
 
                                                         <!-- <th class="border-0">Image</th> -->
-                                                        <th class="border-0">Patient ID</th>
+                                                        <th class="border-0">Disease ID</th>
                                                         <th class="border-0">Disease Name</th>
 
 
@@ -251,8 +255,8 @@
                                                     @foreach (var item in Model)
                                                     {
                                                         <tr>
-                                                            <td>@item.Patient_Id</td>
-                                                            <td>@item.Disease.Disease_Name</td>
+                                                            <td>@item.Disease_Id</td>
+                                                            <td>@item.Disease_Name</td>
 
 
 
@@ -279,6 +283,44 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            <form action="AddDis" method="POST">
+
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h4>Select the Disease</h4>
+                                                        <div class="form-group">
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-prepend"></span>
+                                                                @*<input name="disease" type="text" placeholder="Symptoms" class="form-control">*@
+                                                                @Html.DropDownList("Diseases",null,"selcect disease",new {required=true ,@class= "form-control",@name="dise",@id="myproject" })
+                                                                <input type="hidden" id="hdnProjectName" name="ProjectName" />
+                                                                
+
+                                                            </div>
+                                                            <div>
+                                                                <input type="submit" value="ADD" />
+                                                            </div>
+
+                                                            <!-- <input type="submit" value="Get a prediction" class="btn btn-outline-light float-right" /> -->
+                                                            @*<a href="@Url.Action("GEtPrediction", "Diseases", new { str = })" class="btn btn-outline-light float-right">Get a prediction</a>*@
+                                                        </div>
+
+                                                        @*<div class="form-group">
+                        @Html.LabelFor(model => model, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Disease_Id, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Disease_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <script>
+                                            $("#myproject").on("change", function () {
+                                                $("#hdnProjectName").val($(this).find("option:selected").text());
+
+                                            });
+                                            </script>
                                         </div>
                                     </div>
                                 </div>

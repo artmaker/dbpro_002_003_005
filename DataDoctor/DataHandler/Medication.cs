@@ -17,8 +17,7 @@ namespace DataHandler
         public string Med_Name { get; set; }
         public string timings { get; set; }
     }
-
-        public partial class Medication
+    public partial class Medication
     {
         public int Pres_Id { get; set; }
         public int Med_Id { get; set; }

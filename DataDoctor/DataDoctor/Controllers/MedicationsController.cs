@@ -17,6 +17,7 @@ namespace DataDoctor.Controllers
         private DataDoctorEntities2 db = new DataDoctorEntities2();
         static public int pres_id { get; set; }
         // GET: Medications
+        [Authorize(Roles = "Doctor")]
         public ActionResult Index(int? ide)
         {
             
@@ -47,8 +48,40 @@ namespace DataDoctor.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
+        [Authorize(Roles = "General")]
+        public ActionResult GeneralIndex(int? ide)
+        {
+
+            if (ide != null)
+            {
+                pres_id = Convert.ToInt32(ide);
+                //IEnumerable<SelectListItem> list = new IEnumerable<SelectListItem>();
+                //var medications = db.Medications.Include(m => m.Medicin).Include(m => m.Medicin1);
+                var medications = db.Medications.Where(me => me.Pres_Id == ide);
+                List<Medicates> med = new List<Medicates>();
+                foreach (var item in medications)
+                {
+                    Medicates md = new Medicates();
+                    var med_names = db.Database.SqlQuery<string>(string.Format("Select Name from dbo.Medicin where Med_Id={0}", item.Med_Id)).ToList();
+                    string name = med_names[0];
+                    md.Pres_Id = item.Pres_Id;
+                    md.Med_Name = name;
+                    md.timings = item.timings;
+                    med.Add(md);
+
+                }
+
+                //return View(medications.ToList());
+                return View(med);
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
 
         // GET: Medications/Details/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -64,6 +97,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Medications/Create
+        [Authorize(Roles = "Doctor")]
         public ActionResult Create()
         {
             ViewBag.Med_Id = new SelectList(db.Medicins, "Med_Id", "Name");
@@ -74,6 +108,7 @@ namespace DataDoctor.Controllers
         // POST: Medications/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Pres_Id,Med_Name,timings")] Medicates medication)
@@ -108,9 +143,10 @@ namespace DataDoctor.Controllers
         }
 
 
-        
+
 
         // GET: Medications/Edit/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -130,6 +166,7 @@ namespace DataDoctor.Controllers
         // POST: Medications/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Pres_Id,Med_Id,timings")] Medication medication)
@@ -146,6 +183,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Medications/Delete/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -161,6 +199,7 @@ namespace DataDoctor.Controllers
         }
 
         // POST: Medications/Delete/5
+        [Authorize(Roles = "Doctor")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

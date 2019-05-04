@@ -13,7 +13,7 @@ namespace DataDoctor.Controllers
     public class MedicinsController : Controller
     {
         private DataDoctorEntities2 db = new DataDoctorEntities2();
-
+        [Authorize(Roles = "Doctor")]
         // GET: Medicins
         public ActionResult Index()
         {
@@ -22,7 +22,15 @@ namespace DataDoctor.Controllers
             return View(medicins.ToList());
         }
 
+        [Authorize(Roles = "General")]
+        public ActionResult GeneralIndex()
+        {
+            //var medicins = db.Medicins.Include(m => m.MedicinRank);
+            var medicins = db.Medicins;
+            return View(medicins.ToList());
+        }
         // GET: Medicins/Details/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +46,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Medicins/Create
+        [Authorize(Roles = "Doctor")]
         public ActionResult Create()
         {
             ViewBag.Med_Id = new SelectList(db.MedicinRanks, "Med_Id", "Doctor_Id");
@@ -47,6 +56,7 @@ namespace DataDoctor.Controllers
         // POST: Medicins/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Med_Id,Name,Potency,Company")] Medicin medicin)
@@ -63,6 +73,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Medicins/Edit/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,6 +92,7 @@ namespace DataDoctor.Controllers
         // POST: Medicins/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Med_Id,Name,Potency,Company")] Medicin medicin)
@@ -96,6 +108,7 @@ namespace DataDoctor.Controllers
         }
 
         // GET: Medicins/Delete/5
+        [Authorize(Roles = "Doctor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,6 +124,7 @@ namespace DataDoctor.Controllers
         }
 
         // POST: Medicins/Delete/5
+        [Authorize(Roles = "Doctor")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

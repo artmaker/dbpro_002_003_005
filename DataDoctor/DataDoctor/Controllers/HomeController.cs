@@ -11,6 +11,9 @@ namespace DataDoctor.Controllers
     public class HomeController : Controller
     {
         private DataDoctorEntities2 db =new DataDoctorEntities2();
+
+        //[Authorize(Users = "Doctor")]
+        [Authorize(Roles = "Doctor")]
         public ActionResult Index()
         {
             
@@ -45,6 +48,37 @@ namespace DataDoctor.Controllers
             }
                 //check the changes
                 return View(PrescriptionsList);
+
+        }
+        //[Authorize(Users = "General")]
+        [Authorize(Roles = "General")]
+        public ActionResult GeneralIndex()
+        {
+
+
+            List<Prescription> PrescriptionsList;
+
+            using (DataDoctorEntities2 entity = new DataDoctorEntities2())
+            {
+                var doctorsCount = entity.Database.SqlQuery<int>("Select Count(*) from dbo.AspNetUsers where Licence is not null").ToList();
+
+                ViewBag.doctors = doctorsCount[0];
+
+                var presCount = entity.Database.SqlQuery<int>("Select Count(*) from dbo.Prescription inner join dbo.AspNetUsers On dbo.AspNetUsers.Id=dbo.Prescription.Doctor_Id where Licence is not null").ToList();
+
+                ViewBag.Prescriptions = presCount[0];
+
+
+
+
+                var users = entity.Database.SqlQuery<string>(string.Format("Select Id from dbo.AspNetUsers where UserName='{0}'", User.Identity.Name)).ToList();
+                string user = users[0];
+                
+                PrescriptionsList = entity.Prescriptions.ToList();
+
+            }
+            //check the changes
+            return View(PrescriptionsList);
 
         }
 

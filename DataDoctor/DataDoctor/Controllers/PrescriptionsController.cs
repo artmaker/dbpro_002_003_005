@@ -15,6 +15,7 @@ namespace DataDoctor.Controllers
         private DataDoctorEntities2 db = new DataDoctorEntities2();
         static public int Pat_Id { get; set; }
 
+        [Authorize(Roles = "Doctor")]
         // GET: Prescriptions
         public ActionResult Index(int? ide)
         {
@@ -29,7 +30,21 @@ namespace DataDoctor.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
-
+        [Authorize(Roles = "General")]
+        public ActionResult GeneralIndex(int? ide)
+        {
+            ViewBag.Pat_Id = Convert.ToInt32(ide);
+            if (ide != null)
+            {
+                Pat_Id = Convert.ToInt32(ide);
+                var prescriptions = db.Prescriptions.Include(p => p.AspNetUser).Include(p => p.Patient).Where(a => a.AspNetUser.UserName == User.Identity.Name).Where(p => p.patient_Id == Pat_Id);
+                return View(prescriptions.ToList());
+            }
+            else {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
+        [Authorize(Roles = "Doctor")]
         // GET: Prescriptions/Details/5
         public ActionResult Details(int? id)
         {
@@ -44,7 +59,7 @@ namespace DataDoctor.Controllers
             }
             return View(prescription);
         }
-
+        [Authorize(Roles = "Doctor")]
         // GET: Prescriptions/Create
         public ActionResult Create()
         {
@@ -55,7 +70,7 @@ namespace DataDoctor.Controllers
             //ViewBag.patient_Id = Pat_Id;
             return View();
         }
-
+        [Authorize(Roles = "Doctor")]
         // POST: Prescriptions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -80,7 +95,7 @@ namespace DataDoctor.Controllers
             ViewBag.patient_Id = new SelectList(db.Patients, "Patient_Id", "Area", prescription.patient_Id);
             return View(prescription);
         }
-
+        [Authorize(Roles = "Doctor")]
         // GET: Prescriptions/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -101,6 +116,7 @@ namespace DataDoctor.Controllers
         // POST: Prescriptions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Pres_Id,patient_Id,St_Date,E_Date,Results,Doctor_Id")] Prescription prescription)
@@ -115,7 +131,7 @@ namespace DataDoctor.Controllers
             ViewBag.patient_Id = new SelectList(db.Patients, "Patient_Id", "Area", prescription.patient_Id);
             return View(prescription);
         }
-
+        [Authorize(Roles = "Doctor")]
         // GET: Prescriptions/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -132,6 +148,7 @@ namespace DataDoctor.Controllers
         }
 
         // POST: Prescriptions/Delete/5
+        [Authorize(Roles = "Doctor")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -141,7 +158,7 @@ namespace DataDoctor.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        //[Authorize(Users = "Doctor")]
         protected override void Dispose(bool disposing)
         {
             if (disposing)

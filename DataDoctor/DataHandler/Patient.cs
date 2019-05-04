@@ -18,6 +18,7 @@ namespace DataHandler
         public Patient()
         {
             this.Prescriptions = new HashSet<Prescription>();
+            this.Diseases = new HashSet<Disease>();
             this.AspNetUsers = new HashSet<AspNetUser>();
             this.Medicins = new HashSet<Medicin>();
         }
@@ -32,7 +33,8 @@ namespace DataHandler
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prescription> Prescriptions { get; set; }
-        public virtual Disease Disease { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Disease> Diseases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

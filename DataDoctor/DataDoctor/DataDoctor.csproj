@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -175,17 +178,137 @@
     <Compile Include="Controllers\MedicinsController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\PrescriptionsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SymptomsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\All_Medicins.cs" />
+    <Compile Include="Models\Diseases_Symptoms.cs" />
+    <Compile Include="Models\Doctor_Prescription_Medicins.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Medicate.cs" />
+    <Compile Include="Models\MedicinCompany1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedicinCompany1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models\Medicin_Company.cs" />
+    <Compile Include="Models\Patient_Country.cs" />
+    <Compile Include="Models\Patient_Diseases_Count.cs" />
+    <Compile Include="Models\Patient_Year.cs" />
     <Compile Include="Models\Prescript.cs" />
+    <Compile Include="Models\P_D.cs" />
     <Compile Include="Models\SymptomsForPrediction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\AllMedicins.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllMedicins.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\AM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AM.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\check4.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>check4.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DiseasesSymptoms.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiseasesSymptoms.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DoctorPrescriptionMedicins.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoctorPrescriptionMedicins.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\DPM.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DPM.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\MC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MC.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\MedicinCompany.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MedicinCompany.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PatientCountry.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientCountry.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PatientDiseaseCountDead.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientDiseaseCountDead.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PatientDiseasesCount.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientDiseasesCount.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PatientYear.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientYear.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PC.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PD.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PDC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PDC.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PDCD.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PDCD.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PrescriptionYear.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrescriptionYear.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PY.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PY.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +376,105 @@
     <Content Include="Content\LogAssests\fonts\material-icon\fonts\Material-Design-Iconic-Font.woff" />
     <Content Include="Content\LogAssests\fonts\material-icon\fonts\Material-Design-Iconic-Font.woff2" />
     <Content Include="Content\LogAssests\scss\style.scss" />
+    <Content Include="Reports\PD.xsc">
+      <DependentUpon>PD.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\MC.xsc">
+      <DependentUpon>MC.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DS.xsc">
+      <DependentUpon>DS.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\AM.xsc">
+      <DependentUpon>AM.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\AM.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AM.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\AM.xss">
+      <DependentUpon>AM.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\DPM.xsc">
+      <DependentUpon>DPM.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DPM.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DPM.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DPM.xss">
+      <DependentUpon>DPM.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\DS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\DS.xss">
+      <DependentUpon>DS.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\MC.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MC.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\MC.xss">
+      <DependentUpon>MC.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\PC.xsc">
+      <DependentUpon>PC.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\PC.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PC.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\PC.xss">
+      <DependentUpon>PC.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\PD.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PD.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\PD.xss">
+      <DependentUpon>PD.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\PDC.xsc">
+      <DependentUpon>PDC.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\PDC.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PDC.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\PDC.xss">
+      <DependentUpon>PDC.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\PDCD.xsc">
+      <DependentUpon>PDCD.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\PDCD.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PDCD.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\PDCD.xss">
+      <DependentUpon>PDCD.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\PY.xsc">
+      <DependentUpon>PY.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\PY.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PY.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\PY.xss">
+      <DependentUpon>PY.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -332,6 +554,19 @@
     <Content Include="Views\Diseases\PredictDisease.cshtml" />
     <Content Include="Views\Diseases\Predictions.cshtml" />
     <Content Include="Views\Diseases\PatientDiseases.cshtml" />
+    <Content Include="Views\Diseases\AddPatientDisease.cshtml" />
+    <Content Include="Views\Diseases\GeneralIndex.cshtml" />
+    <Content Include="Views\Patients\GeneralIndex.cshtml" />
+    <Content Include="Views\Prescriptions\GeneralIndex.cshtml" />
+    <Content Include="Views\Medicins\GeneralIndex.cshtml" />
+    <Content Include="Views\Medications\GeneralIndex.cshtml" />
+    <Content Include="Views\Symptoms\GeneralIndex.cshtml" />
+    <Content Include="Views\Diseases\GeneralPatientDiseases.cshtml" />
+    <Content Include="Views\Home\GeneralIndex.cshtml" />
+    <Content Include="Views\Diseases\GeneralPredictDisease.cshtml" />
+    <Content Include="Views\Diseases\GeneralPredictions.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\GeneralIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -351,6 +586,55 @@
       <Project>{112015ca-8e2a-4b9d-b347-702a7cded830}</Project>
       <Name>DataHandler</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Models\MedicinCompany1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MedicinCompany1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\AllMedicins.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AllMedicins.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\check4.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>check4.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DiseasesSymptoms.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DiseasesSymptoms.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\DoctorPrescriptionMedicins.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DoctorPrescriptionMedicins.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\MedicinCompany.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MedicinCompany.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PatientCountry.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PatientCountry.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PatientDiseaseCountDead.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PatientDiseaseCountDead.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PatientDiseasesCount.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PatientDiseasesCount.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PatientYear.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PatientYear.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PrescriptionYear.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PrescriptionYear.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

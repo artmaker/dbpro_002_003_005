@@ -82,7 +82,7 @@
             <PropertyRef Name="Field" />
           </Key>
           <Property Name="Doctor_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Field" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="Field" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Doctor">
           <Key>
@@ -128,6 +128,7 @@
         <EntityType Name="Pat_Die">
           <Key>
             <PropertyRef Name="Patient_Id" />
+            <PropertyRef Name="Disease_Id" />
           </Key>
           <Property Name="Patient_Id" Type="int" Nullable="false" />
           <Property Name="Disease_Id" Type="int" Nullable="false" />
@@ -333,18 +334,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Medicin_MedicinRank">
-          <End Role="MedicinRank" Type="Self.MedicinRank" Multiplicity="1" />
-          <End Role="Medicin" Type="Self.Medicin" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="MedicinRank">
-              <PropertyRef Name="Med_Id" />
-            </Principal>
-            <Dependent Role="Medicin">
-              <PropertyRef Name="Med_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MedicinRank_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="MedicinRank" Type="Self.MedicinRank" Multiplicity="*" />
@@ -357,7 +346,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Pat_Die_Disease">
+        <Association Name="FK_MedicinRank_Medicin">
+          <End Role="Medicin" Type="Self.Medicin" Multiplicity="1" />
+          <End Role="MedicinRank" Type="Self.MedicinRank" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Medicin">
+              <PropertyRef Name="Med_Id" />
+            </Principal>
+            <Dependent Role="MedicinRank">
+              <PropertyRef Name="Med_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pat_Die_Disease1">
           <End Role="Disease" Type="Self.Disease" Multiplicity="1" />
           <End Role="Pat_Die" Type="Self.Pat_Die" Multiplicity="*" />
           <ReferentialConstraint>
@@ -369,9 +370,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Pat_Die_Patient">
+        <Association Name="FK_Pat_Die_Patient1">
           <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
-          <End Role="Pat_Die" Type="Self.Pat_Die" Multiplicity="0..1" />
+          <End Role="Pat_Die" Type="Self.Pat_Die" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patient">
               <PropertyRef Name="Patient_Id" />
@@ -515,19 +516,19 @@
             <End Role="Medicin" EntitySet="Medicin" />
             <End Role="Medication" EntitySet="Medication" />
           </AssociationSet>
-          <AssociationSet Name="FK_Medicin_MedicinRank" Association="Self.FK_Medicin_MedicinRank">
-            <End Role="MedicinRank" EntitySet="MedicinRank" />
-            <End Role="Medicin" EntitySet="Medicin" />
-          </AssociationSet>
           <AssociationSet Name="FK_MedicinRank_AspNetUsers" Association="Self.FK_MedicinRank_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="MedicinRank" EntitySet="MedicinRank" />
           </AssociationSet>
-          <AssociationSet Name="FK_Pat_Die_Disease" Association="Self.FK_Pat_Die_Disease">
+          <AssociationSet Name="FK_MedicinRank_Medicin" Association="Self.FK_MedicinRank_Medicin">
+            <End Role="Medicin" EntitySet="Medicin" />
+            <End Role="MedicinRank" EntitySet="MedicinRank" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pat_Die_Disease1" Association="Self.FK_Pat_Die_Disease1">
             <End Role="Disease" EntitySet="Disease" />
             <End Role="Pat_Die" EntitySet="Pat_Die" />
           </AssociationSet>
-          <AssociationSet Name="FK_Pat_Die_Patient" Association="Self.FK_Pat_Die_Patient">
+          <AssociationSet Name="FK_Pat_Die_Patient1" Association="Self.FK_Pat_Die_Patient1">
             <End Role="Patient" EntitySet="Patient" />
             <End Role="Pat_Die" EntitySet="Pat_Die" />
           </AssociationSet>
@@ -643,7 +644,7 @@
             <PropertyRef Name="Field" />
           </Key>
           <Property Name="Doctor_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Field" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Field" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Doc_Specialization_AspNetUsers" FromRole="Doc_Specialization" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="Doctor">
@@ -685,7 +686,7 @@
           <Property Name="Company" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Medications" Relationship="Self.FK_Medication_Medicin" FromRole="Medicin" ToRole="Medication" />
           <NavigationProperty Name="Medications1" Relationship="Self.FK_Medication_Medicin1" FromRole="Medicin" ToRole="Medication" />
-          <NavigationProperty Name="MedicinRank" Relationship="Self.FK_Medicin_MedicinRank" FromRole="Medicin" ToRole="MedicinRank" />
+          <NavigationProperty Name="MedicinRank" Relationship="Self.FK_MedicinRank_Medicin" FromRole="Medicin" ToRole="MedicinRank" />
           <NavigationProperty Name="Patients" Relationship="Self.Pat_Medicin" FromRole="Medicin" ToRole="Patient" />
         </EntityType>
         <EntityType Name="MedicinRank">
@@ -696,7 +697,7 @@
           <Property Name="Ranking" Type="Int32" Nullable="false" />
           <Property Name="Doctor_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_MedicinRank_AspNetUsers" FromRole="MedicinRank" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Medicin" Relationship="Self.FK_Medicin_MedicinRank" FromRole="MedicinRank" ToRole="Medicin" />
+          <NavigationProperty Name="Medicin" Relationship="Self.FK_MedicinRank_Medicin" FromRole="MedicinRank" ToRole="Medicin" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -710,7 +711,7 @@
           <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescription_Patient" FromRole="Patient" ToRole="Prescription" />
-          <NavigationProperty Name="Disease" Relationship="Self.Pat_Die" FromRole="Patient" ToRole="Disease" />
+          <NavigationProperty Name="Diseases" Relationship="Self.Pat_Die" FromRole="Patient" ToRole="Disease" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.Pat_Doc" FromRole="Patient" ToRole="AspNetUsers" />
           <NavigationProperty Name="Medicins" Relationship="Self.Pat_Medicin" FromRole="Patient" ToRole="Medicin" />
         </EntityType>
@@ -886,14 +887,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Medicin_MedicinRank">
-          <End Role="MedicinRank" Type="Self.MedicinRank" Multiplicity="1" />
-          <End Role="Medicin" Type="Self.Medicin" Multiplicity="0..1" />
+        <Association Name="FK_MedicinRank_Medicin">
+          <End Role="Medicin" Type="Self.Medicin" Multiplicity="1" />
+          <End Role="MedicinRank" Type="Self.MedicinRank" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="MedicinRank">
+            <Principal Role="Medicin">
               <PropertyRef Name="Med_Id" />
             </Principal>
-            <Dependent Role="Medicin">
+            <Dependent Role="MedicinRank">
               <PropertyRef Name="Med_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -915,7 +916,7 @@
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
         <Association Name="Pat_Die">
-          <End Role="Disease" Type="Self.Disease" Multiplicity="0..1" />
+          <End Role="Disease" Type="Self.Disease" Multiplicity="*" />
           <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
         </Association>
         <Association Name="Pat_Doc">
@@ -984,9 +985,9 @@
             <End Role="Medicin" EntitySet="Medicins" />
             <End Role="Medication" EntitySet="Medications" />
           </AssociationSet>
-          <AssociationSet Name="FK_Medicin_MedicinRank" Association="Self.FK_Medicin_MedicinRank">
-            <End Role="MedicinRank" EntitySet="MedicinRanks" />
+          <AssociationSet Name="FK_MedicinRank_Medicin" Association="Self.FK_MedicinRank_Medicin">
             <End Role="Medicin" EntitySet="Medicins" />
+            <End Role="MedicinRank" EntitySet="MedicinRanks" />
           </AssociationSet>
           <AssociationSet Name="FK_Prescription_Patient" Association="Self.FK_Prescription_Patient">
             <End Role="Patient" EntitySet="Patients" />

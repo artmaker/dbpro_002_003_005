@@ -37,7 +37,8 @@ namespace DataDoctor.Controllers
             if (ide != null)
             {
                 Pat_Id = Convert.ToInt32(ide);
-                var prescriptions = db.Prescriptions.Include(p => p.AspNetUser).Include(p => p.Patient).Where(a => a.AspNetUser.UserName == User.Identity.Name).Where(p => p.patient_Id == Pat_Id);
+                //var prescriptions = db.Prescriptions.Include(p => p.AspNetUser).Include(p => p.Patient).Where(a => a.AspNetUser.UserName == User.Identity.Name).Where(p => p.patient_Id == Pat_Id);
+                var prescriptions = db.Prescriptions.Include(p => p.AspNetUser).Include(p => p.Patient).Where(p => p.patient_Id == Pat_Id);
                 return View(prescriptions.ToList());
             }
             else {

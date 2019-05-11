@@ -199,11 +199,11 @@ namespace DataDoctor.Controllers
                 //{
                 //    return RedirectToAction("GeneralPredictions", new { ide = Syptoms[0].Disease_Id });
                 //}
-                return RedirectToAction("GeneralPredictions", new { ide = idd });
+                return RedirectToAction("Predictions", new { ide = idd });
             }
             else
             {
-                return RedirectToAction("GeneralPredictions", new { ide = -1 });
+                return RedirectToAction("Predictions", new { ide = -1 });
             }
         }
         [Authorize(Roles = "General")]
@@ -310,7 +310,8 @@ namespace DataDoctor.Controllers
         {
             Pat_Id = ide;
             //string query = string.Format("select Disease from  Pat_Die inner join  Patient  ON Pat_Die.Patient_Id=Patient.Patient_Id where Patient.Doctor_Id=(Select Id from AspNetUsers where UserName='{0}')",User.Identity.Name);
-            string query = string.Format("select Disease.Disease_Id,Disease.Disease_Name from Pat_Doc inner join (Disease inner join (Pat_Die inner join  Patient  ON Pat_Die.Patient_Id = Patient.Patient_Id) on Disease.Disease_Id = Pat_Die.Disease_Id) on Pat_Doc.Patient_Id = Patient.Patient_Id where Pat_Doc.Doctor_Id = (Select Id from AspNetUsers where UserName = '{0}') and Patient.Patient_Id={1}", User.Identity.Name, ide);
+            //string query = string.Format("select Disease.Disease_Id,Disease.Disease_Name from Pat_Doc inner join (Disease inner join (Pat_Die inner join  Patient  ON Pat_Die.Patient_Id = Patient.Patient_Id) on Disease.Disease_Id = Pat_Die.Disease_Id) on Pat_Doc.Patient_Id = Patient.Patient_Id where Pat_Doc.Doctor_Id = (Select Id from AspNetUsers where UserName = '{0}') and Patient.Patient_Id={1}", User.Identity.Name, ide);
+            string query = string.Format("select Disease.Disease_Id,Disease.Disease_Name from Pat_Doc inner join (Disease inner join (Pat_Die inner join  Patient  ON Pat_Die.Patient_Id = Patient.Patient_Id) on Disease.Disease_Id = Pat_Die.Disease_Id) on Pat_Doc.Patient_Id = Patient.Patient_Id where Patient.Patient_Id={0}",ide);
             SqlCommand cmd = new SqlCommand(query, connection);
             connection.Open();
             SqlDataReader reader = cmd.ExecuteReader();

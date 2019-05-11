@@ -128,7 +128,7 @@ namespace DataDoctor.Controllers
 
                     db.Medications.Add(med);
                     db.SaveChanges();
-                    return RedirectToAction("Index", medication.Pres_Id);
+                    return RedirectToAction("Index", new { ide=medication.Pres_Id });
                 }
             }
             catch
